@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
 import FloatingLines from './FloatingLines';
 import HeroCarousel from './HeroCarousel';
@@ -12,10 +12,10 @@ const services = [
 ];
 
 export function Hero() {
-  const heroRef = useRef<HTMLElement>(null);
+  const heroRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
+    container: heroRef,
+    offset: ["start start", "end start"],
   });
 
   const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
@@ -28,6 +28,7 @@ export function Hero() {
       className="hero relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
         background: 'linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-accent) 50%, var(--color-brand-secondary) 100%)',
+        position: 'relative',
       }}
     >
       {/* Animated Background - parallax-bg layer */}

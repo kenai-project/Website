@@ -10,7 +10,9 @@ const testimonials = [
     author: 'Sarah Chen',
     role: 'CEO',
     company: 'RetailCo',
-    logo: 'https://via.placeholder.com/120x40/2D7176/FFFFFF?text=RetailCo',
+    logo: process.env.NODE_ENV === 'development'
+      ? '/assets/fallback-120x40.png'
+      : 'https://via.placeholder.com/120x40/2D7176/FFFFFF?text=RetailCo',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
   },
   {
@@ -19,7 +21,9 @@ const testimonials = [
     author: 'Michael Rodriguez',
     role: 'CMO',
     company: 'FinanceHub',
-    logo: 'https://via.placeholder.com/120x40/4DA9B0/FFFFFF?text=FinanceHub',
+    logo: process.env.NODE_ENV === 'development'
+      ? '/assets/fallback-120x40.png'
+      : 'https://via.placeholder.com/120x40/4DA9B0/FFFFFF?text=FinanceHub',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop',
   },
   {
@@ -28,7 +32,9 @@ const testimonials = [
     author: 'Emily Thompson',
     role: 'Founder',
     company: 'TechStart',
-    logo: 'https://via.placeholder.com/120x40/3A3D3F/FFFFFF?text=TechStart',
+    logo: process.env.NODE_ENV === 'development'
+      ? '/assets/fallback-120x40.png'
+      : 'https://via.placeholder.com/120x40/3A3D3F/FFFFFF?text=TechStart',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
   },
 ];
@@ -103,7 +109,7 @@ export function Testimonials() {
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={1}
-              onDragEnd={(e, { offset, velocity }) => {
+              onDragEnd={(_e, { offset, velocity }) => {
                 const swipe = swipePower(offset.x, velocity.x);
 
                 if (swipe < -swipeConfidenceThreshold) {
